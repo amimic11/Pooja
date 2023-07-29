@@ -1,0 +1,58 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1264d97d13f241f632f4afea1f936560",
+    "entities": [
+      {
+        "tableName": "God",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`godName` TEXT NOT NULL, `aarti` TEXT NOT NULL, `chalisa` TEXT NOT NULL, `family` TEXT NOT NULL, `naams` TEXT NOT NULL, PRIMARY KEY(`godName`))",
+        "fields": [
+          {
+            "fieldPath": "godName",
+            "columnName": "godName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "aarti",
+            "columnName": "aarti",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chalisa",
+            "columnName": "chalisa",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "family",
+            "columnName": "family",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "naams",
+            "columnName": "naams",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "godName"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1264d97d13f241f632f4afea1f936560')"
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+plugins {
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp' version "$ksp_version"
+    id 'kotlin-parcelize'
+}
+
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
+}
+
+android {
+    namespace 'com.graveno.alphalab.app.pooja'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.graveno.alphalab.app.pooja"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "0.1alpha"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.7'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation('androidx.core:core-ktx:1.10.0')
+    implementation('androidx.lifecycle:lifecycle-runtime-ktx:2.6.1')
+
+    //region test cases...
+    testImplementation("junit:junit:$junit_version")
+    androidTestImplementation("androidx.test.ext:junit:$android_test_version")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_version")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
+    debugImplementation("androidx.compose.ui:ui-tooling:$compose_version")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
+    //endregion
+
+    //region compose repository...
+    implementation("androidx.activity:activity-compose:$activity_compose_version")
+    implementation("androidx.compose.ui:ui:$compose_version")
+    implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
+    implementation("androidx.compose.material3:material3:$android_material_compose_version")
+    //compose view model...
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$compose_viewmodel_version")
+    //endregion
+
+
+    //region hilt implementation repository...
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    //endregion
+
+    //region compose navigation ramcosta...
+    implementation("io.github.raamcosta.compose-destinations:animations-core:$compose_navigation_version")
+    ksp("io.github.raamcosta.compose-destinations:ksp:$compose_navigation_version")
+    //endregion
+
+    //region room...
+    implementation "androidx.room:room-ktx:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
+    //gson...
+    implementation "com.google.code.gson:gson:$gson_version"
+    //endregion
+
+    //region data store...
+    implementation ("androidx.datastore:datastore-preferences:$data_store_version")
+    //endregion
+
+    //region webview...
+    implementation "com.google.accompanist:accompanist-webview:$accompanist_version"
+    //endregion
+}
+
+kapt {
+    correctErrorTypes true
+}
